@@ -1,4 +1,4 @@
-const SERVER_URL = "http://localhost:3000";
+const SERVER_URL = "";
 
 let currentUser = null;
 let voiceLang = "es-MX";
