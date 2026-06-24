@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>NovaMind AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="sidebar-overlay"></div>
+
+<aside id="sidebar">
+  <div class="sidebar-top">
+    <span class="sidebar-logo">✦ NovaMind</span>
+    <button class="icon-btn" id="sidebar-close-btn" title="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <button class="new-chat-btn" id="new-chat-btn">
+    <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Nuevo chat
+  </button>
+
+  <div class="chats-label">Conversaciones</div>
+  <div id="chat-list"></div>
+
+  <div class="guest-banner" id="guest-banner">
+    <strong>Modo invitado</strong><br>
+    Tu historial no se guarda. <button class="guest-login-link" id="guest-login-btn">Inicia sesión</button> para guardar tus chats.
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="user-pill">
+      <div class="user-avatar" id="user-av">?</div>
+      <div style="flex:1;overflow:hidden">
+        <div class="user-name" id="user-name-label">Invitado</div>
+        <div class="user-email" id="user-email-label">Sin sesión</div>
+      </div>
+    </div>
+    <div class="sidebar-actions">
+      <button class="icon-btn" id="settings-btn" title="Configuración">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      </button>
+      <button class="icon-btn" id="theme-btn" title="Cambiar tema">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+      <button class="icon-btn" id="logout-btn" title="Cerrar sesión" style="display:none">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+      <button class="icon-btn" id="login-btn-sidebar" title="Iniciar sesión">
+        <svg viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      </button>
+    </div>
+  </div>
+</aside>
+
+<div id="main">
+  <div id="header">
+    <button class="icon-btn" id="sidebar-toggle-btn">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <span class="header-title" id="header-title">Nueva conversación</span>
+    <div class="mode-tabs">
+      <button class="mode-tab active" data-mode="chat">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span>Chat</span>
+      </button>
+      <button class="mode-tab" data-mode="voice">
+        <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        <span>Voz</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div id="chat-panel">
+    <div id="messages">
+      <div class="welcome" id="welcome-screen">
+        <div class="welcome-icon">✦</div>
+        <h2>¿En qué te ayudo hoy?</h2>
+        <p>Chatea, envía imágenes o activa el modo voz para una experiencia manos libres.</p>
+        <div class="quick-prompts">
+          <div class="quick-prompt" data-prompt="Explícame cómo funciona la inteligencia artificial">¿Qué es la IA?</div>
+          <div class="quick-prompt" data-prompt="Escríbeme un poema creativo corto">Escribe un poema</div>
+          <div class="quick-prompt" data-prompt="Dame 5 ideas de negocios innovadores">Ideas de negocio</div>
+          <div class="quick-prompt" data-prompt="Ayúdame a aprender inglés con frases básicas">Aprender inglés</div>
+        </div>
+      </div>
+    </div>
+    <input type="file" id="file-input" accept="image/*" style="display:none">
+    <div id="input-area">
+      <div class="input-box">
+        <div id="img-preview-wrap" style="display:none">
+          <div class="img-attached">
+            <img id="img-preview-thumb" src="" alt="">
+            <button class="img-rm" id="img-rm-btn">✕</button>
+          </div>
+        </div>
+        <div class="input-row">
+          <textarea id="msg-input" rows="1" placeholder="Escribe un mensaje..."></textarea>
+          <div class="input-actions">
+            <button class="attach-btn" id="attach-btn" title="Adjuntar imagen">
+              <svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+            </button>
+            <button class="send-btn" id="send-btn">
+              <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOICE PANEL -->
+  <div id="voice-panel">
+    <div class="sphere-wrap" id="sphere-wrap">
+      <canvas id="sphereCanvas"></canvas>
+      <div class="sphere-ring"></div>
+      <div class="sphere-ring2"></div>
+    </div>
+    <div class="voice-status" id="voice-status">Presiona el micrófono para hablar</div>
+    <div class="voice-bubble" id="voice-bubble">La respuesta del asistente aparecerá aquí...</div>
+    <button class="mic-btn" id="mic-btn">
+      <svg viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settings-modal">
+  <div class="modal">
+    <div class="modal-title">⚙ Configuración</div>
+    <div class="setting-row">
+      <div>
+        <div class="setting-label">Modo oscuro</div>
+        <div class="setting-sub">Cambiar entre tema claro y oscuro</div>
+      </div>
+      <div class="toggle" id="dark-toggle"><div class="toggle-knob"></div></div>
+    </div>
+    <div class="auth-field">
+      <label>Idioma de voz</label>
+      <input type="text" id="voice-lang" value="es-MX" placeholder="es-MX">
+    </div>
+    <button class="btn-primary" id="save-settings-btn">Guardar cambios</button>
+    <button class="modal-close" id="close-settings-btn">Cerrar</button>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div id="auth-overlay">
+  <div class="auth-card">
+    <button class="auth-close-btn" id="auth-close-btn">✕</button>
+    <div class="auth-logo">✦ NovaMind</div>
+    <p class="auth-sub">Inicia sesión para guardar tu historial</p>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login">Iniciar sesión</button>
+      <button class="auth-tab" id="tab-register">Registrarse</button>
+    </div>
+    <div id="auth-form" style="display:flex;flex-direction:column;gap:14px;">
+      <div class="auth-field">
+        <label>Nombre de usuario</label>
+        <input type="text" id="auth-user" placeholder="tu_nombre" autocomplete="username">
+      </div>
+      <div class="auth-field" id="auth-email-wrap" style="display:none">
+        <label>Correo electrónico</label>
+        <input type="email" id="auth-email" placeholder="correo@ejemplo.com">
+      </div>
+      <div class="auth-field">
+        <label>Contraseña</label>
+        <div style="position:relative;display:flex;align-items:center;">
+          <input type="password" id="auth-pass" placeholder="••••••••" autocomplete="current-password" style="flex:1;padding-right:40px">
+          <button type="button" id="toggle-pass-btn" style="position:absolute;right:10px;background:none;border:none;cursor:pointer;color:var(--text2);font-size:16px;padding:0;line-height:1;" title="Mostrar/ocultar contraseña">👁</button>
+        </div>
+      </div>
+      <p class="auth-error" id="auth-error"></p>
+      <button class="btn-primary" id="auth-submit-btn">Iniciar sesión</button>
+      <div class="auth-divider">o</div>
+      <button class="btn-google" id="auth-google-btn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        Continuar con Google
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
