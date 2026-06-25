@@ -1,4 +1,4 @@
-const SERVER_URL = "";
+const SERVER_URL = "http://localhost:3000";
 
 let currentUser = null;
 let voiceLang = "es-MX";
@@ -388,9 +388,7 @@ async function callAI(messages){
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({messages, user: currentUser?.username || null})
   });
-  let data;
-  try { data=await response.json(); }
-  catch { throw new Error("El servidor no está listo, intenta de nuevo."); }
+  const data=await response.json();
   if(!response.ok)throw new Error(data.error||"Error del servidor");
   return data.text||"Sin respuesta";
 }
@@ -649,7 +647,7 @@ function finishSpeaking(){
         recog=new(window.SpeechRecognition||window.webkitSpeechRecognition)();
         startSR();
       }catch(e){}
-    },2000);
+    },300);
   }
 }
 

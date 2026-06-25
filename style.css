@@ -51,7 +51,7 @@ body {
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
 /* ═══════════════════════════════════════════
-   AUTH OVERLAY
+   AUTH OVERLAY (opcional, por encima de la app)
 ═══════════════════════════════════════════ */
 #auth-overlay {
   position: fixed; inset: 0; z-index: 1000;
@@ -169,7 +169,7 @@ body {
   background: var(--bg2);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column;
-  height: 100dvh;
+  height: 100vh;
   transition: width 0.3s cubic-bezier(0.4,0,0.2,1), min-width 0.3s, transform 0.3s cubic-bezier(0.4,0,0.2,1);
   z-index: 100;
   flex-shrink: 0;
@@ -244,6 +244,7 @@ body {
 .chat-item:hover .chat-del { opacity: 1; }
 .chat-del:hover { color: var(--accent3); }
 
+/* Guest message in sidebar */
 .guest-banner {
   margin: 8px 10px;
   padding: 10px 12px;
@@ -292,7 +293,7 @@ body {
 ═══════════════════════════════════════════ */
 #main {
   flex: 1; display: flex; flex-direction: column;
-  height: 100dvh; overflow: hidden;
+  height: 100vh; overflow: hidden;
   min-width: 0;
 }
 
@@ -562,14 +563,11 @@ canvas#sphereCanvas { border-radius: 50%; display: block; cursor: pointer; }
 ═══════════════════════════════════════════ */
 @media (max-width: 640px) {
   #sidebar {
-    position: fixed;
-    height: 100dvh;
+    position: fixed; height: 100vh;
     transform: translateX(calc(-1 * var(--sidebar-w)));
     z-index: 200;
   }
   #sidebar.open { transform: translateX(0); }
-
-  #main { height: 100dvh; }
 
   .mode-tab span { display: none; }
   .mode-tab { padding: 6px 10px; }
@@ -579,7 +577,9 @@ canvas#sphereCanvas { border-radius: 50%; display: block; cursor: pointer; }
 
   .bubble { max-width: 85%; font-size: 13px; }
 
+  /* Voice panel en móvil */
   #voice-panel { padding: 20px 12px; gap: 18px; }
+
   .voice-bubble { max-height: 120px; font-size: 13px; }
 }
 
