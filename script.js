@@ -388,7 +388,9 @@ async function callAI(messages){
     method:"POST",headers:{"Content-Type":"application/json"},
     body:JSON.stringify({messages, user: currentUser?.username || null})
   });
-  const data=await response.json();
+  let data;
+  try { data=await response.json(); }
+  catch { throw new Error("El servidor no está listo, intenta de nuevo."); }
   if(!response.ok)throw new Error(data.error||"Error del servidor");
   return data.text||"Sin respuesta";
 }
@@ -647,7 +649,7 @@ function finishSpeaking(){
         recog=new(window.SpeechRecognition||window.webkitSpeechRecognition)();
         startSR();
       }catch(e){}
-    },300);
+    },2000);
   }
 }
 
